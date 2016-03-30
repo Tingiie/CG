@@ -7,22 +7,29 @@ import java.util.ArrayList;
 
 public class Parser {
 	private BufferedReader reader;
-	private File file;
 	
-	public Parser(File file) throws FileNotFoundException {
-		this.file = file;
-		FileReader fileReader = new FileReader(file);
-		reader = new BufferedReader(fileReader);
+	public Parser(File file)  {
+			try {
+				reader = new BufferedReader(new FileReader(file));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
-	public ArrayList<String> parse() throws IOException{
+	
+	public ArrayList<String> parse() {
 		String humectant;
 		ArrayList<String> humectants = new ArrayList<String>();
-		while((humectant = reader.readLine()) != null){
-			humectants.add(humectant);			
-		}
-		
-		reader.close();
+			try {
+				while((humectant = reader.readLine()) != null){
+					humectants.add(humectant);			
+				}
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		return humectants;
 	}
 }
