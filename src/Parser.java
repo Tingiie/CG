@@ -7,29 +7,40 @@ import java.util.ArrayList;
 
 public class Parser {
 	private BufferedReader reader;
-	
-	public Parser(File file)  {
-			try {
-				reader = new BufferedReader(new FileReader(file));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	private ArrayList<String> humectantList;
+
+	public Parser(File file) {
+		humectantList = new ArrayList<String>();
+		try {
+			reader = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
 	public ArrayList<String> parse() {
 		String humectant;
-		ArrayList<String> humectants = new ArrayList<String>();
-			try {
-				while((humectant = reader.readLine()) != null){
-					humectants.add(humectant);			
-				}
-				reader.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			while ((humectant = reader.readLine()) != null) {
+				humectantList.add(humectant);
 			}
-		return humectants;
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return humectantList;
+	}
+
+	public String listAll() {
+		if (!humectantList.isEmpty()) {
+			StringBuilder list = new StringBuilder();
+
+			for (int i = 0; i < humectantList.size(); i++) {
+				list.append((humectantList.get(i) + "\n"));
+			}
+			return list.toString();
+		} else {
+			return "Empty list";
+		}
 	}
 }

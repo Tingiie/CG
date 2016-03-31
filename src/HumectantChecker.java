@@ -10,15 +10,12 @@ public class HumectantChecker {
 		while (true) {
 			String ingredient = sc.nextLine();
 			ingredient = ingredient.toLowerCase();
-				
-			
+
 			File file = new File("Humectants.txt");
 			Parser parser = new Parser(file);
 			ArrayList<String> humectants = parser.parse();
-			if (ingredient.equals("list all")){
-				for (int i=0; i<humectants.size(); i++){
-				System.out.println(humectants.get(i));
-				}
+			if (ingredient.equals("list all")) {
+				System.out.println(parser.listAll());
 			} else
 
 			if (humectants.contains(ingredient)) {
